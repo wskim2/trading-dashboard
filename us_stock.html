@@ -1,0 +1,538 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="refresh" content="30"> <!-- Auto-refresh every 30s -->
+        <title>Crypto Trading Dashboard</title>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --bg-color: #0f172a;
+                --text-main: #f8fafc;
+                --text-muted: #94a3b8;
+                --card-bg: rgba(30, 41, 59, 0.7);
+                --accent: #38bdf8;
+                --accent-glow: rgba(56, 189, 248, 0.3);
+                --border-color: rgba(255, 255, 255, 0.08);
+            }
+            
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: var(--bg-color);
+                color: var(--text-main);
+                font-family: 'Outfit', sans-serif;
+                background-image: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
+
+            header {
+                text-align: center;
+                margin-bottom: 50px;
+                animation: fadeIn 0.8s ease-out;
+            }
+
+            h1 {
+                font-size: 3rem;
+                margin: 0;
+                background: linear-gradient(135deg, #38bdf8, #818cf8);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-shadow: 0 0 25px var(--accent-glow);
+            }
+
+            .balance-container {
+                background: var(--card-bg);
+                backdrop-filter: blur(15px);
+                border: 1px solid var(--border-color);
+                border-radius: 20px;
+                padding: 40px;
+                text-align: center;
+                margin-bottom: 50px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                transition: transform 0.3s ease;
+                animation: fadeIn 1s ease-out;
+            }
+            
+            .balance-container:hover {
+                transform: translateY(-5px);
+                border-color: var(--accent);
+                box-shadow: 0 15px 40px var(--accent-glow);
+            }
+
+            .total-balance {
+                font-size: 4rem;
+                font-weight: 800;
+                margin: 10px 0;
+                color: #fff;
+            }
+
+            .update-time {
+                color: var(--text-muted);
+                font-size: 1rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .update-time::before {
+                content: '';
+                display: block;
+                width: 8px;
+                height: 8px;
+                background-color: #4ade80;
+                border-radius: 50%;
+                box-shadow: 0 0 10px #4ade80;
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+                animation: fadeIn 1.2s ease-out;
+            }
+
+            .card {
+                background: var(--card-bg);
+                backdrop-filter: blur(15px);
+                border: 1px solid var(--border-color);
+                border-radius: 16px;
+                padding: 25px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px var(--accent-glow);
+                border-color: var(--accent);
+            }
+
+            .card-header h2 {
+                margin: 0 0 20px 0;
+                font-size: 1.5rem;
+                color: #e2e8f0;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 15px;
+            }
+
+            .label {
+                color: var(--text-muted);
+                font-size: 0.85rem;
+                margin: 0 0 5px 0;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .value {
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin: 0 0 15px 0;
+            }
+
+            .highlight {
+                color: var(--accent);
+                font-size: 1.6rem;
+                font-weight: 800;
+                margin-bottom: 0;
+            }
+
+            .divider {
+                height: 1px;
+                background: var(--border-color);
+                margin: 15px 0;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Bot Account Dashboard</h1>
+            </header>
+            
+            <div class="balance-container">
+                <p class="label">Total Estimated Equity</p>
+                <div class="total-balance">$0.00</div>
+                <div class="update-time">Last updated: 05-08-2026 20:54:22</div>
+            </div>
+
+            <div class="grid">
+                
+            <div class="card">
+                <div class="card-header">
+                    <h2>CASH</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">8,359.0643</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$0.0000</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$8,359.06</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>EWY</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">127.4335</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$94.7691</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$12,076.77</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>TQQQ</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">317.1902</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$39.9065</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$12,657.94</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>SMH</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">34.0101</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$341.8905</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$11,627.75</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>SPY</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">11.8275</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$676.3900</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$8,000.00</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>SPMO</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">88.2250</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$103.5199</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$9,133.04</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>QQQ</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">17.1596</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$545.6137</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$9,362.49</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>DIVO</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">171.3223</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$45.9513</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$7,872.48</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>ARKK</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">102.0994</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$78.3550</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$8,000.00</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>NLR</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">89.5579</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$121.6883</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$10,898.15</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>UCO</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">98.2918</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$33.0465</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$3,248.20</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>GOOG</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">38.5106</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$262.6840</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$10,116.12</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>AAPL</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">37.6279</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$241.1804</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$9,075.11</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>TSLA</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">29.3404</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$376.4253</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$11,044.49</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>ORCL</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">54.7134</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$210.2285</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$11,502.31</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>MU</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">47.4774</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$289.3411</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$13,737.15</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>LLY</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">1.8057</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$898.7800</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$1,622.92</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>AIS</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">270.6097</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$38.5892</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$10,442.63</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>BE</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">104.4569</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$113.1134</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$11,815.48</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>GEV</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">6.5269</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$715.1023</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$4,667.40</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>GLD</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">17.8854</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$379.9256</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$6,795.13</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>HWM</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">37.1218</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$215.2142</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$7,989.15</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>NBIS</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">25.6810</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$122.0952</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$3,135.53</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>LRCX</h2>
+                </div>
+                <div class="card-body">
+                    <p class="label">Amount</p>
+                    <p class="value">30.1120</p>
+                    <p class="label">Market Price</p>
+                    <p class="value">$207.1355</p>
+                    <div class="divider"></div>
+                    <p class="label">Total Value</p>
+                    <p class="value highlight">$6,237.26</p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </body>
+    </html>
+    
